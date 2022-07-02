@@ -1,6 +1,11 @@
 Algorithm
 -> A set of steps a program takes to finish a task.
 
+1. The steps in the algorithm need to be in a very specific order.
+2. The steps also nedd to be distinct
+3. The algorithm should produce a result
+4. The algorithm should complete in a finite amount of time.
+
 Efficiency
 ------------
 1. Time --> Time compexity

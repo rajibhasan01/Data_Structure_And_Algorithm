@@ -1,0 +1,7 @@
+Data structure
+--------------
+-> A data storage format. It is the collection of values and the format they are stored in, the relationships between the values int he collection as well as teh operations applied on the data stored in the structure.
+
+Array
+-------
+-> Array is the common data structure. It is a fundamental data structure, it can use to represent a collection of value.
