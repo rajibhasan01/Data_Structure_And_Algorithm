@@ -1,0 +1,123 @@
+# O(1) < O(logn) < O(n) < O(nlogn) < O(n^2) holds true.
+
+Example 1
+
+   x = n 
+   while ( x > 0 ) { 
+       x = x - 1 
+   } 
+
+The above is  O(n) 
+
+Example 2
+
+   x = n 
+   while ( x > 0 ) { 
+       x = x / 2 
+   } 
+
+The above is  O(logn) 
+
+Example 3
+
+   x = n 
+   while ( x > 0 ) { 
+      y = n 
+      while ( y > 0 ) { 
+          y = y - 1 
+      } 
+      x = x - 1 
+   } 
+
+The above is  O(n2) 
+
+Example 4
+
+   x = n 
+   while ( x > 0 ) { 
+      y = x 
+      while ( y > 0 ) { 
+          y = y - 1 
+      } 
+      x = x - 1 
+   } 
+
+The above is  O(n2) 
+
+Example 5
+
+   x = n 
+   while ( x > 0 ) { 
+      y = n 
+      while ( y > 0 ) { 
+          y = y / 2 
+      } 
+      x = x - 1 
+   } 
+
+The above is  O(nlogn) 
+
+Example 6
+
+   x = n 
+   while ( x > 0 ) { 
+      y = x 
+      while ( y > 0 ) { 
+          y = y / 2 
+      } 
+      x = x - 1 
+   } 
+
+The above is  O(nlogn) 
+
+Example 7
+
+   x = n 
+   while ( x > 0 ) { 
+      y = n 
+      while ( y > 0 ) { 
+          y = y - 1 
+      } 
+      x = x / 2 
+   } 
+
+The above is  O(nlogn) 
+
+Example 8
+
+   x = n 
+   while ( x > 0 ) { 
+      y = x 
+      while ( y > 0 ) { 
+          y = y - 1 
+      } 
+      x = x / 2 
+   } 
+
+The above is  O(n) 
+
+Example 9
+
+   x = n 
+   while ( x > 0 ) { 
+      y = n 
+      while ( y > 0 ) { 
+          y = y / 2 
+      } 
+      x = x / 2 
+   } 
+
+The above is  O(log2n) 
+
+Example 10
+
+   x = n 
+   while ( x > 0 ) { 
+      y = x 
+      while ( y > 0 ) { 
+          y = y / 2 
+      } 
+      x = x / 2 
+   } 
+
+The above is  O(log2n)

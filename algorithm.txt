@@ -1,0 +1,27 @@
+Algorithm
+-> A set of steps a program takes to finish a task.
+
+Efficiency
+------------
+1. Time --> Time compexity
+2. Space -> Space compexity
+
+Big O (is a notation to describe the compexity)
+-> Theoretical definition of the compexity of an Algorithm as a function of the size.
+-> Here O means order of magnitude of compexity.
+
+Linear Search -> O(n)
+Binary Search -> O(log n)
+
+* Quadratic Runtime ---> n^2
+* Cubic Runtime -------> n^3
+* Quasilinear Runtime -> n log n (Ex- Merge Sort (worst case))
+* Polynomial Runtime --> n^k
+* Exponential Runtime -> x^n (Ex- Brute Force)
+* Factorial Runtime ---> n! (Ex- Traveling Salesman)
+
+In merge sort it first need to split all the number as we know the worst case in binary search is log n so. it takes log n time then its needs n times of comparision thats why in worst case it take O(nlogn). 
+
+Factorial
+----------
+n! -> n(n-1)(n-2)...(2)(1)
