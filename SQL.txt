@@ -1,0 +1,57 @@
+Some of The Most Important SQL Commands
+-----------------------------------------
+SELECT - extracts data from a database
+UPDATE - updates data in a database
+DELETE - deletes data from a database
+INSERT INTO - inserts new data into a database
+CREATE DATABASE - creates a new database
+ALTER DATABASE - modifies a database
+CREATE TABLE - creates a new table
+ALTER TABLE - modifies a table
+DROP TABLE - deletes a table
+CREATE INDEX - creates an index (search key)
+DROP INDEX - deletes an index
+
+For single entity:
+----------------------------------
+SELECT distinct country from customers
+
+select count(*) as DistinctCountries from (select distinct country from customers);
+
+where
+----------
+select * from customers where country='Mexico';
+select * from customers where customerID=2;
+select * from customers where customerID=2 or city='Berlin'
+
+select * from customers where not country='Germany'
+
+and , or
+----------
+
+select * from customers where country='Germany' and (city='Berlin' or city='München')
+
+order by
+----------
+select * from customers order by country;
+select * from customers order by country desc
+select * from customers order by country, customerName;
+
+insert into
+------------
+insert into customers (customerName, contactName, address, city, postalcode, country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+
+Null VALUES
+------------
+select customerName, contactName, address from customers where address is null
+
+select customerName, contactName, address from customers where address is not null
+
+update
+----------
+UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE CustomerID = 1;
+
+update customers set country='Bangladesh' where contactName='Rajib Hasan';
+
+delete from customers where customerName='Alfreds Futterkiste'
