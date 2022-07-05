@@ -15,7 +15,6 @@ DROP INDEX - deletes an index
 For single entity:
 ----------------------------------
 SELECT distinct country from customers
-
 select count(*) as DistinctCountries from (select distinct country from customers);
 
 where
@@ -23,7 +22,6 @@ where
 select * from customers where country='Mexico';
 select * from customers where customerID=2;
 select * from customers where customerID=2 or city='Berlin'
-
 select * from customers where not country='Germany'
 
 and , or
@@ -37,16 +35,18 @@ select * from customers order by country;
 select * from customers order by country desc
 select * from customers order by country, customerName;
 
+
 insert into
 ------------
 insert into customers (customerName, contactName, address, city, postalcode, country)
 VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
 
+
 Null VALUES
 ------------
 select customerName, contactName, address from customers where address is null
-
 select customerName, contactName, address from customers where address is not null
+
 
 update
 ----------
@@ -54,4 +54,171 @@ UPDATE Customers SET ContactName = 'Alfred Schmidt', City= 'Frankfurt' WHERE Cus
 
 update customers set country='Bangladesh' where contactName='Rajib Hasan';
 
+delete
+----------
+
 delete from customers where customerName='Alfreds Futterkiste'
+
+Limit
+----------
+select * from customers limit 3;
+select * from customers where country='Germany' limit 3;
+
+
+
+Top
+------
+SELECT TOP 50 percent * FROM Customers;
+
+
+
+min & max
+----------
+select min(price) as lowestPrice from products
+select max(price) as HighestPrice from products;
+
+
+
+count, avg, sum
+----------------
+select count(productId) from products
+select avg(price) from products;
+select sum(price) from products
+
+
+
+like
+-----------
+select * from customers where customerName like '%or%';
+select * from customers where customerName not like 'a%'
+
+WHERE CustomerName LIKE 'a%'	Finds any values that start with "a"
+WHERE CustomerName LIKE '%a'	Finds any values that end with "a"
+WHERE CustomerName LIKE '%or%'	Finds any values that have "or" in any position
+WHERE CustomerName LIKE '_r%'	Finds any values that have "r" in the second position
+WHERE CustomerName LIKE 'a_%'	Finds any values that start with "a" and are at least 2 characters in length
+WHERE CustomerName LIKE 'a__%'	Finds any values that start with "a" and are at least 3 characters in length
+WHERE ContactName LIKE 'a%o'	Finds any values that start with "a" and ends with "o"
+
+
+
+wildcard
+-----------
+bl% finds bl, black, blue, and blob
+h_t finds hot, hat, and hit
+h[oa]t finds hot and hat, but not hit
+h[^oa]t finds hit, but not hot and hat
+c[a-b]t finds cat and cbt
+
+
+select * from customers where city like '_ondon';
+select * from customers where city like '[bsp]%';
+
+select * from customers where city like '[!bsp]%';
+or
+select * from customers where city not like '[bsp]%';
+
+select * from customers where city like '[a-c]%';
+
+
+in
+------------
+select * from customers where country in ('Germany', 'UK','BD')
+select * from customers where country in (select country from suppliers);
+
+
+
+between
+-----------
+select * from products where price between 10 and 20;
+select * from products where price between 10 and 20 and productId not in (1,3,15);
+select * from products where productName between 'Carnarvon Tigers' AND 'Mozzarella di Giovanni' order by productName;
+select * from orders where OrderDate between '1996-07-01' AND '1996-07-31';
+
+
+
+Aliases
+-----------
+select customerName, address+', '+city+', '+postalCode+', '+country as address from customers where country not in('Germany','UK');
+
+select orders.orderId, orders.OrderDate, customers.customerName from customers, orders
+where customers.customerId = orders.customerId and customers.customerName='Around the Horn'
+
+
+
+join/inner join (take all matched value)
+-----------------------------------------
+select orders.orderId, customers.customerName, orders.orderDate from orders
+inner join customers on orders.customerId=customers.customerId
+
+select * from customers c join orders o on c.customerId = o.customerId
+
+
+
+left join/left outer join (take the all value from left side table and matched value from another table)
+-------------------------------------------------------------------------------------------------------
+select * from customers left join orders on customers.customerId=orders.customerId;
+
+
+
+right join/right outer join (take the all value from right side table and matched value from another table)
+-----------------------------------------------------------------------------------------------------------
+select * from customers right join orders on customers.customerId=orders.customerId;
+
+
+
+full join (take the all value from all table)
+---------------------------------------------
+select * from customers full join orders on customers.customerId=orders.customerId;
+
+
+natural join
+---------------
+-> a natural join is a join operation that creats an implicit join clause for you based on the common collumns in the two tables being joined.
+-> it can be an inner join, left join, right join. Default is inner join.
+-> in natural join we don't need to write the condition part
+-> common collumns don't repeated in natural join
+
+* select * from customers natural join orders
+* select * from customers natural left join orders
+* select * from customers natural right join orders
+
+cross join
+------------
+-> first table every single row multiply with another table each row.
+
+
+
+self join
+------------
+select a.customerName as [customer 1], b.customername as "customer 2", a.city from customers as a, customers as b
+where a.customerId<>b.customerId and a.city= b.city order by a.city;
+
+
+
+
+
+with conditon / inner join
+---------------------------
+select c.customerName, c.city, o.orderId, o.employeeId from customers as c inner join orders as o on c.customerId=o.customerId where o.shipperId>2
+select c.customerName, c.city, o.orderId, o.employeeId from customers as c, orders as o where c.customerId=o.customerId and o.shipperId>2
+
+
+3rd lowest price
+------------------
+select * from products order by price asc limit 1 offset 2
+
+
+union (common part of two table) / union all(all part of two table)
+----------------------------------------------------------------------
+SELECT City FROM Customers UNION all SELECT City FROM Suppliers ORDER BY City;
+
+
+group by
+---------------
+select count(customerId) as total, country from customers group by country;
+
+having
+----------
+select e.lastName, o.orderId, count(orderId) as "total order" from orders as o inner join employees as e on o.employeeId=e.employeeId
+where e.lastName not in('Davolio','Callahan') group by e.lastName having count(o.orderId) > 28;
