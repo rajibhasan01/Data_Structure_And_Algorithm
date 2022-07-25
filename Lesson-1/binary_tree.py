@@ -50,7 +50,16 @@ def parse_tuple(data):
     Interestingly to create the left and right subtrees for the node, the parse_tuple function invokes itselft.
     The chain of recursive calls ends when parse_tuple encounters a number or None as input.
 """
+# Tree to tuple converstion
+def tree_to_tuple(node):
+    print(node);
+    if isinstance(node, TreeNode):
+        if node.left is None and node.right is None:
+            return node.key;
+    else: return node;
+    return (tree_to_tuple(node.left), node.key, tree_to_tuple(node.right));
 
+# display tree
 def display_keys(node, space='\t', level=0):
     # print(node.key if node else None, level);
 
